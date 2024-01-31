@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="test2">
+
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <mass
+        value="0.1" />
+      <inertia
+        ixx="0.573051894517131"
+        ixy="8.94839687286462E-17"
+        ixz="-0.0212217788655825"
+        iyy="1.8413277424106"
+        iyz="-2.09358370781287E-18"
+        izz="2.36982591331089" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://test2/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://test2/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="leftlink">
+    <inertial>
+      <origin
+        xyz="-2.77555756156289E-17 -0.527857142857143 -1.11022302462516E-16"
+        rpy="0 0 0" />
+      <mass
+        value="2.5" />
+      <inertia
+        ixx="0.00336127973986582"
+        ixy="1.24575282199214E-19"
+        ixz="1.9445840773932E-35"
+        iyy="0.00655257687722492"
+        iyz="1.52004437652461E-36"
+        izz="0.00336127973986582" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://test2/meshes/leftlink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://test2/meshes/leftlink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="leftjoint"
+    type="continuous">
+    <origin
+      xyz="0.11202 0.27 -0.042101"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="leftlink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="1"
+      velocity="1" />
+  </joint>
+  <link
+    name="rightlink">
+    <inertial>
+      <origin
+        xyz="-2.77555756156289E-17 0.527857142857143 1.11022302462516E-16"
+        rpy="0 0 0" />
+      <mass
+        value="2.5" />
+      <inertia
+        ixx="0.00336127973986582"
+        ixy="-7.06059686911802E-20"
+        ixz="-7.48194790221564E-19"
+        iyy="0.00655257687722492"
+        iyz="-4.5303311269179E-20"
+        izz="0.00336127973986583" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://test2/meshes/rightlink.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://test2/meshes/rightlink.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="rightjoint"
+    type="continuous">
+    <origin
+      xyz="0.11202 -0.27 -0.042101"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="rightlink" />
+    <axis
+      xyz="0 1 0" />
+    <limit
+      effort="1"
+      velocity="1" />
+  </joint>
+  <link name="camera_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+    <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+   <box size="0.1 0.1 0.1"/>
+      </geometry>
+      <material name="red"/>
+    </visual>
+
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+   <joint name="camera" type="fixed">
+    <axis xyz="0 0 1" />
+    <origin xyz="0.3 0 0.06" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+  </joint>
+  <transmission name="Rev1_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="leftjoint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev1_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+<transmission name="Rev2_tran">
+  <type>transmission_interface/SimpleTransmission</type>
+  <joint name="rightjoint">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+  </joint>
+  <actuator name="Rev2_actr">
+    <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    <mechanicalReduction>1</mechanicalReduction>
+  </actuator>
+</transmission>
+
+
+  <gazebo>
+<plugin name="differential_drive_controller"
+filename="libgazebo_ros_diff_drive.so">
+<rosDebugLevel>Debug</rosDebugLevel>
+<publishWheelTF>false</publishWheelTF>
+<robotNamespace>/</robotNamespace>
+<publishTf>1</publishTf>
+<publishWheelJointState>false</publishWheelJointState>
+<alwaysOn>true</alwaysOn>
+<updateRate>100.0</updateRate>
+<leftJoint>leftjoint</leftJoint>
+<rightJoint>rightjoint</rightJoint>
+<wheelSeparation>0.52496</wheelSeparation>
+<wheelDiameter>0.24</wheelDiameter>
+<broadcastTF>1</broadcastTF>
+<wheelTorque>10</wheelTorque>
+<wheelAcceleration>1.8</wheelAcceleration>
+<commandTopic>cmd_vel</commandTopic>
+<odometryFrame>odom</odometryFrame>
+<odometryTopic>odom</odometryTopic>
+
+<robotBaseFrame>base_footprint</robotBaseFrame>
+  <publishWheelTF>true</publishWheelTF>
+
+    <!-- Set to true to publish transforms for the odometry, defaults to true -->
+    <publishOdom>true</publishOdom>
+
+    <!-- Set to true to publish sensor_msgs/JointState on /joint_states for the wheel joints, defaults to false -->
+    <publishWheelJointState>true</publishWheelJointState>
+
+    <!-- Set to true to swap right and left wheels, defaults to true -->
+    <legacyMode>false</legacyMode>
+</plugin>
+</gazebo>
+ <!-- hokuyo -->
+  <gazebo reference="camera_link">
+      <sensor type="ray" name="head_hokuyo_sensor">
+      <pose>0 0 0 0 0 0</pose>
+      <visualize>true</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>720</samples>
+            <resolution>1</resolution>
+            <min_angle>-1.570796</min_angle>
+            <max_angle>1.570796</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.10</min>
+          <max>30.0</max>
+          <resolution>0.01</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <!-- Noise parameters based on published spec for Hokuyo laser
+               achieving "+-30mm" accuracy at range < 10m.  A mean of 0.0m and
+               stddev of 0.01m will put 99.7% of samples within 0.03m of the true
+               reading. -->
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/scan</topicName>
+        <frameName>camera_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+</robot>

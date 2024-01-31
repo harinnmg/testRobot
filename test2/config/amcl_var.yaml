@@ -1,0 +1,5 @@
+min_particles: 100
+max_particles: 500
+update_min_d: 0.2
+update_min_a: 0.5
+

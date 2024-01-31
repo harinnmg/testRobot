@@ -1,0 +1,17 @@
+<launch>
+    <node name="map_server" pkg="map_server" type="map_server" args="/home/harinarayanan/catkin_ws/src/test2/map/map.yaml" output="screen"/>
+
+    <!-- Launch move_base with your configuration file -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+    <rosparam file="$(find test2)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+    <rosparam file="$(find test2)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <rosparam file="$(find test2)/config/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find test2)/config/global_costmap_params.yaml" command="load" /> 
+    <rosparam file="$(find test2)/config/base_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find test2)/config/dwa_local_planner_params_burger.yaml" command="load" />
+ </node>
+
+  <include file="$(find test2)/launch/amcl.launch"/>
+</launch>
+
